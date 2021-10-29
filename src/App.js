@@ -11,7 +11,7 @@ import { useEffect } from 'react'
 import { darkModeAction } from './redux/actions/configActions'
 
 function App() {
-  const config = useSelector((state) => state.config)
+  const config = useSelector((state) => state.configReducer)
   const themeValue = config.darkMode
   const dispatch = useDispatch()
 

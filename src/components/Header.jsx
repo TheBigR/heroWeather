@@ -6,7 +6,7 @@ import { darkModeAction } from '../redux/actions/configActions'
 const Header = () => {
   const dispatch = useDispatch()
 
-  const config = useSelector((state) => state.config)
+  const config = useSelector((state) => state.configReducer)
   const themeValue = config.darkMode
 
   const themeChange = (value) => {
