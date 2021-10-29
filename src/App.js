@@ -1,4 +1,3 @@
-import logo from './logo.svg'
 import { BrowserRouter, Route } from 'react-router-dom'
 import './App.css'
 import { ThemeProvider } from 'styled-components'
@@ -9,6 +8,9 @@ import Container from './theme/components/Container'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { darkModeAction } from './redux/actions/configActions'
+import LocationList from './components/LocationList'
+import LocationInput from './components/LocationInput'
+import LocationItem from './components/LocationItem'
 
 function App() {
   const config = useSelector((state) => state.configReducer)
@@ -26,18 +28,10 @@ function App() {
       <BrowserRouter>
         <Container>
           <Header />
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React 3
-          </a>
+          <Route path="/" exact component={LocationInput} />
+          <Route path="/favorites" exact component={LocationList} />
+          <Route path="/weather" exact component={LocationInput} />
+          <Route path="/weather/:id" exact component={LocationItem} />
         </Container>
       </BrowserRouter>
     </ThemeProvider>

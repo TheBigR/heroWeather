@@ -19,7 +19,7 @@ const Header = () => {
       className="ui secondary pointing menu "
       style={{ backgroundColor: 'orange', padding: 3 }}
     >
-      <Link to="/Weather" className="ui button teal">
+      <Link to="/weather" className="ui button teal">
         <i className="cloud icon"></i>Weather
       </Link>
       <Link to="/favorites" className="ui button teal">
