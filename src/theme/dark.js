@@ -1,7 +1,7 @@
 const darkTheme = {
   colors: {
-    background: 'black',
-    textColor: 'white',
+    background: '#1a2639',
+    textColor: '#fcfefe',
   },
 }
 

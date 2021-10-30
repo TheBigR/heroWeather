@@ -9,5 +9,5 @@ export default styled.div`
   align-items: center;
   justify-content: center;
   font-family: sans-serif;
-  padding: 0;
+  padding: 12px;
 `

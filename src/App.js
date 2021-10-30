@@ -11,6 +11,7 @@ import { darkModeAction } from './redux/actions/configActions'
 import LocationList from './components/LocationList'
 import LocationInput from './components/LocationInput'
 import LocationItem from './components/LocationItem'
+import TlvWeather from './components/tlvWeather'
 
 function App() {
   const config = useSelector((state) => state.configReducer)
@@ -22,13 +23,13 @@ function App() {
       dispatch(darkModeAction(window.localStorage.getItem('theme')))
     }
   }, [config.darkMode, dispatch])
-  console.log(themeValue)
+
   return (
     <ThemeProvider theme={themeValue === 'light' ? lightTheme : darkTheme}>
       <BrowserRouter>
         <Container>
           <Header />
-          <Route path="/" exact component={LocationInput} />
+          <Route path="/" exact component={TlvWeather} />
           <Route path="/favorites" exact component={LocationList} />
           <Route path="/weather" exact component={LocationInput} />
           <Route path="/weather/:id" exact component={LocationItem} />
