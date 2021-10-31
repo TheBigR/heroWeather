@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/heroWeather/static/css/main.a617e044.chunk.css",
+    "main.js": "/heroWeather/static/js/main.aa0f5c6d.chunk.js",
+    "main.js.map": "/heroWeather/static/js/main.aa0f5c6d.chunk.js.map",
+    "runtime-main.js": "/heroWeather/static/js/runtime-main.f0b97068.js",
+    "runtime-main.js.map": "/heroWeather/static/js/runtime-main.f0b97068.js.map",
+    "static/js/2.48f50879.chunk.js": "/heroWeather/static/js/2.48f50879.chunk.js",
+    "static/js/2.48f50879.chunk.js.map": "/heroWeather/static/js/2.48f50879.chunk.js.map",
+    "static/js/3.67127439.chunk.js": "/heroWeather/static/js/3.67127439.chunk.js",
+    "static/js/3.67127439.chunk.js.map": "/heroWeather/static/js/3.67127439.chunk.js.map",
+    "index.html": "/heroWeather/index.html",
+    "static/css/main.a617e044.chunk.css.map": "/heroWeather/static/css/main.a617e044.chunk.css.map",
+    "static/js/2.48f50879.chunk.js.LICENSE.txt": "/heroWeather/static/js/2.48f50879.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f0b97068.js",
+    "static/js/2.48f50879.chunk.js",
+    "static/css/main.a617e044.chunk.css",
+    "static/js/main.aa0f5c6d.chunk.js"
+  ]
+}
