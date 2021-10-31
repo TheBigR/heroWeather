@@ -18,7 +18,6 @@ const LocationForecast = () => {
   useEffect(() => {
     setForcast(getForecast(location.location.key))
   }, [location.location.key])
-  console.log(location.location)
   return (
     <div>
       <div>

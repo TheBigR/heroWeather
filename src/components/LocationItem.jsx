@@ -2,13 +2,16 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { addLocation, deleteLocation } from '../redux/actions/locationActions'
+import { useLocation } from 'react-router'
 
 const LocationItem = ({ location }) => {
   const dispatch = useDispatch()
   const [weather, setWeather] = useState({ temp: '', weatherDesc: '' })
   const locations = useSelector((state) => state.locationReducer)
+  const [currentLocation, setCurrentLocation] = useState(location)
+  const passedLocation = useLocation()
   const isFavorite = locations.find(
-    (currentLocation) => currentLocation.key === location.key,
+    (currentLoc) => currentLoc.key === location.key,
   )
   const favoriteChange = (favorite) => {
     if (favorite) {
@@ -23,14 +26,22 @@ const LocationItem = ({ location }) => {
   }
 
   useEffect(() => {
-    setWeather(getCurrentWeatherByLocationKey(location.key))
-  }, [location.key])
+    setWeather(getCurrentWeatherByLocationKey(currentLocation.key))
+  }, [currentLocation.key])
+
+  useEffect(() => {
+    if (!passedLocation.location) {
+      console.log('no passed location!')
+    } else {
+      setCurrentLocation(passedLocation.location)
+    }
+  }, [passedLocation.location])
 
   return (
     <div className="ui card">
       <div className="content">
         <i className="right floated start icon"></i>
-        <div className="header">{location.name}</div>
+        <div className="header">{currentLocation.name}</div>
         <div className="description">
           <p className="floated right">temperature: {weather.temp}</p>
           <p>Weather: {weather.weatherDesc}</p>
@@ -44,7 +55,6 @@ const LocationItem = ({ location }) => {
               location,
             }}
             className="ui button teal"
-            location="crappy crap"
           >
             Forecast
           </Link>
