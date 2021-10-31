@@ -20,8 +20,3 @@ export function updateLocation(location) {
     payload: location,
   }
 }
-
-export function getForecast(locationKey) {
-  console.log('getting forecast by location Id')
-  return [23, 25, 24, 22, 20]
-}

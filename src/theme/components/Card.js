@@ -5,7 +5,7 @@ export default styled.div`
   color: ${(props) => props.theme.colors.textColor};
   flex-direction: column;
   width: 10vw;
-  height: 17vh;
+  height: 20vh;
   align-items: center;
   justify-content: center;
   font-family: sans-serif;

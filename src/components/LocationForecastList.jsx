@@ -7,29 +7,36 @@ import * as accuWeather from '../consts/accuWeather'
 const LocationForecast = () => {
   const location = useLocation()
   const [forecast, setForcast] = useState([])
-  const getForecast = async (key) => {
-    console.log('getting forecast according to key ' + key)
-    const result = await accuWeatherApi.get(`/forecasts/v1/daily/5day/${key}`, {
-      params: {
-        apikey: accuWeather.accuWeatherKey,
-        metric: true,
-      },
-    })
-    console.log(result.data.DailyForecasts)
-    return result.data.DailyForecasts
-  }
   useEffect(() => {
-    setForcast(getForecast(location.location.key))
+    async function getForecast(key) {
+      const result = await accuWeatherApi.get(
+        `/forecasts/v1/daily/5day/${key}`,
+        {
+          params: {
+            apikey: accuWeather.accuWeatherKey,
+            metric: true,
+          },
+        },
+      )
+      return result.data.DailyForecasts
+    }
+
+    getForecast(location.location.key).then(function (result) {
+      setForcast(result)
+    })
   }, [location.location.key])
+
   return (
     <div>
       <div>
         <h1>{location.location.name} forecast </h1>
-        <div className="ui cards">
-          {forecast.map((daily) => {
-            return <ForecastItem forecast={daily} key={daily.Date} />
-          })}
-        </div>
+        {forecast.length > 0 && (
+          <div className="ui cards">
+            {forecast.map((daily) => {
+              return <ForecastItem forecast={daily} key={daily.Date} />
+            })}
+          </div>
+        )}
       </div>
     </div>
   )
