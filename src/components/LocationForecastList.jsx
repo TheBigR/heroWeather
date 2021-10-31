@@ -1,19 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router'
 import ForecastItem from './ForecastItem'
+import accuWeatherApi from '../apis/accuWeather'
+import * as accuWeather from '../consts/accuWeather'
 
 const LocationForecast = () => {
   const location = useLocation()
   const [forecast, setForcast] = useState([])
-  const getForecast = (key) => {
+  const getForecast = async (key) => {
     console.log('getting forecast according to key ' + key)
-    return [
-      { maxTemp: 23, minTemp: 10, weather: 'cloudy', date: '331' },
-      { maxTemp: 23, minTemp: 10, weather: 'cloudy', date: '332' },
-      { maxTemp: 23, minTemp: 10, weather: 'cloudy', date: '333' },
-      { maxTemp: 23, minTemp: 10, weather: 'cloudy', date: '334' },
-      { maxTemp: 23, minTemp: 10, weather: 'cloudy', date: '335' },
-    ]
+    const result = await accuWeatherApi.get(`/forecasts/v1/daily/5day/${key}`, {
+      params: {
+        apikey: accuWeather.accuWeatherKey,
+        metric: true,
+      },
+    })
+    console.log(result.data.DailyForecasts)
+    return result.data.DailyForecasts
   }
   useEffect(() => {
     setForcast(getForecast(location.location.key))
@@ -24,7 +27,7 @@ const LocationForecast = () => {
         <h1>{location.location.name} forecast </h1>
         <div className="ui cards">
           {forecast.map((daily) => {
-            return <ForecastItem forecast={daily} key={daily.date} />
+            return <ForecastItem forecast={daily} key={daily.Date} />
           })}
         </div>
       </div>

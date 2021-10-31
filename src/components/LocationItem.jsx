@@ -24,7 +24,7 @@ const LocationItem = ({ location }) => {
   }
   const getCurrentWeatherByLocationKey = async (locationKey) => {
     const result = await accuWeatherApi.get(
-      `/forecasts/v1/daily/1day/${locationKey}`,
+      `/currentconditions/v1/${locationKey}`,
       {
         params: {
           apikey: accuWeather.accuWeatherKey,
@@ -33,10 +33,9 @@ const LocationItem = ({ location }) => {
       },
     )
     setWeather({
-      max: result.data.DailyForecasts[0].Temperature.Maximum.Value,
-      min: result.data.DailyForecasts[0].Temperature.Minimum.Value,
-      unit: result.data.DailyForecasts[0].Temperature.Minimum.Unit,
-      phrase: result.data.DailyForecasts[0].Day.IconPhrase,
+      temperature: result.data[0].Temperature.Metric.Value,
+      unit: result.data[0].Temperature.Metric.Unit,
+      phrase: result.data[0].WeatherText,
     })
   }
 
@@ -57,10 +56,7 @@ const LocationItem = ({ location }) => {
         <div className="header">{currentLocation.name}</div>
         <div className="description">
           <p className="floated right">
-            max: {weather.max} {weather.unit}
-          </p>
-          <p className="floated right">
-            min: {weather.min} {weather.unit}
+            temperature: {weather.temperature} {weather.unit}
           </p>
           <p>{weather.phrase}</p>
         </div>
