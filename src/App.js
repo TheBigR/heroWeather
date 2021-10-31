@@ -35,7 +35,7 @@ function App() {
         <Container>
           <Header />
           <Route
-            path="/"
+            path="/heroWeather"
             exact
             component={() => <LocationItem location={tlv} />}
           />

@@ -26,7 +26,7 @@ const Header = () => {
         <i className="star icon"></i>Favorites
       </Link>
       <div className="right menu">
-        <Link to="/" className="item ">
+        <Link to="/heroWeather" className="item ">
           <i className="home icon"></i>
         </Link>
         <div className="ui buttons">
