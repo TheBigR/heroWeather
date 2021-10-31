@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { addLocation, deleteLocation } from '../redux/actions/locationActions'
 
 const LocationItem = ({ location }) => {
@@ -36,6 +37,18 @@ const LocationItem = ({ location }) => {
         </div>
       </div>
       <div className="extra content">
+        <span className="left floated">
+          <Link
+            to={{
+              pathname: `/weather/forecast/${location.name}`,
+              location,
+            }}
+            className="ui button teal"
+            location="crappy crap"
+          >
+            Forecast
+          </Link>
+        </span>
         <span
           className="right floated star "
           onClick={() => favoriteChange(isFavorite)}

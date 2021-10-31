@@ -10,8 +10,9 @@ import { useEffect } from 'react'
 import { darkModeAction } from './redux/actions/configActions'
 import LocationList from './components/LocationList'
 import LocationInput from './components/LocationInput'
-import LocationItem from './components/LocationItem'
+
 import TlvWeather from './components/tlvWeather'
+import LocationForecast from './components/LocationForecastList'
 
 function App() {
   const config = useSelector((state) => state.configReducer)
@@ -32,7 +33,11 @@ function App() {
           <Route path="/" exact component={TlvWeather} />
           <Route path="/favorites" exact component={LocationList} />
           <Route path="/weather" exact component={LocationInput} />
-          <Route path="/weather/:id" exact component={LocationItem} />
+          <Route
+            path="/weather/forecast/:location"
+            exact
+            component={LocationForecast}
+          />
         </Container>
       </BrowserRouter>
     </ThemeProvider>
