@@ -22,25 +22,27 @@ const LocationItem = ({ location }) => {
       dispatch(addLocation(location))
     }
   }
-  const getCurrentWeatherByLocationKey = async (locationKey) => {
-    const result = await accuWeatherApi.get(
-      `/currentconditions/v1/${locationKey}`,
-      {
-        params: {
-          apikey: accuWeather.accuWeatherKey,
-          metric: true,
-        },
-      },
-    )
-    setWeather({
-      temperature: result.data[0].Temperature.Metric.Value,
-      unit: result.data[0].Temperature.Metric.Unit,
-      phrase: result.data[0].WeatherText,
-    })
-  }
 
   useEffect(() => {
-    getCurrentWeatherByLocationKey(currentLocation.key)
+    async function getCurrentWeatherByLocationKey(locationKey) {
+      const result = await accuWeatherApi.get(
+        `/currentconditions/v1/${locationKey}`,
+        {
+          params: {
+            apikey: accuWeather.accuWeatherKey,
+            metric: true,
+          },
+        },
+      )
+      return {
+        temperature: result.data[0].Temperature.Metric.Value,
+        unit: result.data[0].Temperature.Metric.Unit,
+        phrase: result.data[0].WeatherText,
+      }
+    }
+    getCurrentWeatherByLocationKey(currentLocation.key).then(function (result) {
+      setWeather(result)
+    })
   }, [currentLocation.key])
 
   useEffect(() => {
