@@ -11,4 +11,5 @@ export default styled.div`
   font-family: sans-serif;
   padding: 10px;
   border-radius: 5px;
+  margin: 10px;
 `

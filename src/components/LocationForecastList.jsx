@@ -23,7 +23,7 @@ const LocationForecast = () => {
     <div>
       <div>
         <h1>{location.location.name} forecast </h1>
-        <div className="ui grid five">
+        <div className="ui cards">
           {forecast.map((daily) => {
             return <ForecastItem forecast={daily} key={daily.date} />
           })}
