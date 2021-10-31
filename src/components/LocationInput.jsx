@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, {  useState } from 'react'
 import LocationItem from './LocationItem'
 import accuWeatherApi from '../apis/accuWeather'
 import * as accuWeather from '../consts/accuWeather'
@@ -14,8 +14,7 @@ const LocationInput = () => {
         apikey: accuWeather.accuWeatherKey,
         q: city,
       },
-    })
-    console.log(result.data[0].Key)
+    })    
     setLocation({ name: city, key: result.data[0].Key })
   }
 

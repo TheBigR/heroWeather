@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { addLocation, deleteLocation } from '../redux/actions/locationActions'
 import { useLocation } from 'react-router'
+import accuWeatherApi from '../apis/accuWeather'
+import * as accuWeather from '../consts/accuWeather'
 
 const LocationItem = ({ location }) => {
   const dispatch = useDispatch()
@@ -20,13 +22,26 @@ const LocationItem = ({ location }) => {
       dispatch(addLocation(location))
     }
   }
-  const getCurrentWeatherByLocationKey = (locationKey) => {
-    console.log('getting weather')
-    return { temp: '23', weatherDesc: 'sunny' }
+  const getCurrentWeatherByLocationKey = async (locationKey) => {
+    const result = await accuWeatherApi.get(
+      `/forecasts/v1/daily/1day/${locationKey}`,
+      {
+        params: {
+          apikey: accuWeather.accuWeatherKey,
+          metric: true,
+        },
+      },
+    )
+    setWeather({
+      max: result.data.DailyForecasts[0].Temperature.Maximum.Value,
+      min: result.data.DailyForecasts[0].Temperature.Minimum.Value,
+      unit: result.data.DailyForecasts[0].Temperature.Minimum.Unit,
+      phrase: result.data.DailyForecasts[0].Day.IconPhrase,
+    })
   }
 
   useEffect(() => {
-    setWeather(getCurrentWeatherByLocationKey(currentLocation.key))
+    getCurrentWeatherByLocationKey(currentLocation.key)
   }, [currentLocation.key])
 
   useEffect(() => {
@@ -41,8 +56,13 @@ const LocationItem = ({ location }) => {
         <i className="right floated start icon"></i>
         <div className="header">{currentLocation.name}</div>
         <div className="description">
-          <p className="floated right">temperature: {weather.temp}</p>
-          <p>Weather: {weather.weatherDesc}</p>
+          <p className="floated right">
+            max: {weather.max} {weather.unit}
+          </p>
+          <p className="floated right">
+            min: {weather.min} {weather.unit}
+          </p>
+          <p>{weather.phrase}</p>
         </div>
       </div>
       <div className="extra content">
