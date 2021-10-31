@@ -4,10 +4,15 @@ Sample app created for training purposes.
 
 libraries used:
 axios
+
 redux-thunk
+
 react-redux
+
 redux
+
 styled-components
+
 react-router-dom
 
 home screen shows current weather in tel aviv.
