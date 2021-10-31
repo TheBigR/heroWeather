@@ -30,9 +30,7 @@ const LocationItem = ({ location }) => {
   }, [currentLocation.key])
 
   useEffect(() => {
-    if (!passedLocation.location) {
-      console.log('no passed location!')
-    } else {
+    if (passedLocation.location) {
       setCurrentLocation(passedLocation.location)
     }
   }, [passedLocation.location])

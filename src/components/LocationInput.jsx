@@ -1,12 +1,22 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import LocationItem from './LocationItem'
+import accuWeatherApi from '../apis/accuWeather'
+import * as accuWeather from '../consts/accuWeather'
 
 const LocationInput = () => {
   let [city, setCity] = useState('')
   let [location, setLocation] = useState()
 
-  const getLocationKey = (city) => {
-    setLocation({ name: city, key: 'nonono',  })
+  
+  const getLocationKey = async (city) => {
+    const result = await accuWeatherApi.get('/locations/v1/cities/search', {
+      params: {
+        apikey: accuWeather.accuWeatherKey,
+        q: city,
+      },
+    })
+    console.log(result.data[0].Key)
+    setLocation({ name: city, key: result.data[0].Key })
   }
 
   return (
@@ -22,7 +32,10 @@ const LocationInput = () => {
           />
           <button
             className="ui button teal"
-            onClick={() => getLocationKey(city)}
+            onClick={() => {
+              getLocationKey(city)
+              setCity('')
+            }}
           >
             <i className="search ui icon"></i>
           </button>
